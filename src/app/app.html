@@ -1,4 +1,13 @@
+<!--
+  app.html — the template for the App component (app.ts).
+  This is what actually appears on the screen inside <app-root>.
+-->
 <main class="container">
+  <!--
+    {{ ... }} is "interpolation": Angular runs the code inside the braces and
+    prints the result. title() reads the signal defined in app.ts, so this
+    shows: Welcome to India Insurance
+  -->
   <h1>Welcome to {{ title() }}</h1>
   <p>This is a simple Angular app. Edit <code>src/app/app.html</code> to change this page.</p>
 </main>

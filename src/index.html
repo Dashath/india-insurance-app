@@ -1,13 +1,26 @@
 <!doctype html>
+<!--
+  index.html — the ONE real HTML page the browser downloads.
+  Angular does not create lots of HTML pages; it injects everything into
+  this single page (that is why it is called a "Single Page Application").
+-->
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <!-- Text shown on the browser tab. -->
   <title>IndiaInsuranceApp</title>
+  <!-- The base URL the app uses when building links. -->
   <base href="/">
+  <!-- Makes the page scale correctly on phones/tablets. -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+  <!--
+    <app-root> is a placeholder. It matches the "selector" defined in
+    app.ts. When the app starts, Angular replaces the inside of this tag
+    with the App component's template (app.html).
+  -->
   <app-root></app-root>
 </body>
 </html>
