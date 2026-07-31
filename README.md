@@ -1,8 +1,7 @@
 # India Insurance App
 
-A sample [Angular](https://angular.dev) application with a basic project
-structure: routing, a shared header/footer layout, and a few feature pages
-(Home, Policies, About).
+A simple starter [Angular](https://angular.dev) application — a single page
+you can build on as you learn.
 
 ## Prerequisites
 
@@ -48,12 +47,11 @@ to stop it.
 ```
 src/
   app/
-    app.ts / app.html / app.css   # root component + layout (header/nav/footer)
-    app.routes.ts                 # route definitions
-    pages/
-      home/                       # Home page
-      policies/                   # Policies list page
-      about/                      # About page
-  main.ts                         # bootstrap
-  index.html                      # host page
+    app.ts        # root component (TypeScript logic)
+    app.html      # root component template (what you see)
+    app.css       # root component styles
+    app.config.ts # app-wide providers/config
+  main.ts         # bootstrap (starts the app)
+  index.html      # host HTML page (<app-root> lives here)
+  styles.css      # global styles
 ```

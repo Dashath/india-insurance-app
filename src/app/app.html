@@ -1,16 +1,4 @@
-<header class="app-header">
-  <div class="brand">{{ title() }}</div>
-  <nav class="app-nav">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-    <a routerLink="/policies" routerLinkActive="active">Policies</a>
-    <a routerLink="/about" routerLinkActive="active">About</a>
-  </nav>
-</header>
-
-<main class="app-main">
-  <router-outlet />
+<main class="container">
+  <h1>Welcome to {{ title() }}</h1>
+  <p>This is a simple Angular app. Edit <code>src/app/app.html</code> to change this page.</p>
 </main>
-
-<footer class="app-footer">
-  <span>&copy; {{ 2025 }} India Insurance — sample Angular app</span>
-</footer>
