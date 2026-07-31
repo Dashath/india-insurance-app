@@ -1,0 +1,23 @@
+<section>
+  <h1>Insurance Policies</h1>
+  <table class="policy-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Policy</th>
+        <th>Category</th>
+        <th>Annual Premium (₹)</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (policy of policies(); track policy.id) {
+        <tr>
+          <td>{{ policy.id }}</td>
+          <td>{{ policy.name }}</td>
+          <td>{{ policy.category }}</td>
+          <td>{{ policy.premium }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>
