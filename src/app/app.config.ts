@@ -18,10 +18,13 @@ export const appConfig: ApplicationConfig = {
     provideAuth0({
       domain: 'dev-xnkvq2agd3hl7nsp.us.auth0.com',
       clientId: 'dJg5Wzl0pTYCXAXklRDReLdzkBEsKBFG',
+      useRefreshTokens: true,              // Enable refresh token usage
+  cacheLocation: 'localstorage',       // Use localStorage for persistence
       authorizationParams: {
         // After login, Auth0 redirects the browser back to this URL.
         // window.location.origin is e.g. http://localhost:4200
         redirect_uri: window.location.origin,
+         scope: 'openid profile email offline_access',  // Add offline_access
       },
     }),
   ],

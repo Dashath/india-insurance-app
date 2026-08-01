@@ -1,0 +1,107 @@
+<div class="marine-quote-container">
+  <h1>Marine Insurance Quote</h1>
+  <p class="subtitle">Get instant premium calculation for cargo insurance</p>
+
+  <form [formGroup]="marineForm" (ngSubmit)="onSubmit()" class="quote-form">
+    <div class="form-group">
+      <label for="cargoValue">Cargo Value (USD)</label>
+      <input
+        id="cargoValue"
+        type="number"
+        formControlName="cargoValue"
+        placeholder="Enter cargo value"
+        min="0.01"
+        step="0.01"
+      />
+      <div class="error" *ngIf="marineForm.get('cargoValue')?.errors?.['required']">
+        Cargo value is required
+      </div>
+      <div class="error" *ngIf="marineForm.get('cargoValue')?.errors?.['min']">
+        Cargo value must be greater than 0
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="commodityRisk">Commodity Risk</label>
+      <select id="commodityRisk" formControlName="commodityRisk">
+        <option value="">Select risk level</option>
+        <option value="low">Low Risk</option>
+        <option value="medium">Medium Risk</option>
+        <option value="high">High Risk</option>
+      </select>
+      <div class="error" *ngIf="marineForm.get('commodityRisk')?.errors?.['required']">
+        Please select a risk level
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="clause">Insurance Clause</label>
+      <select id="clause" formControlName="clause">
+        <option value="">Select clause</option>
+        <option value="A">Clause A (All Risks)</option>
+        <option value="B">Clause B (With Average)</option>
+        <option value="C">Clause C (FPA)</option>
+      </select>
+      <div class="error" *ngIf="marineForm.get('clause')?.errors?.['required']">
+        Please select a clause
+      </div>
+    </div>
+
+    <div class="premium-display" *ngIf="marineForm.valid">
+      <div class="premium-row">
+        <span>Sum Insured (CIF + 10%):</span>
+        <span class="value">${{ sumInsured.toFixed(2) }}</span>
+      </div>
+      <div class="premium-row">
+        <span>Applicable Rate:</span>
+        <span class="value">{{ getRate() }}%</span>
+      </div>
+      <div class="premium-row total">
+        <span>Premium:</span>
+        <span class="value">${{ premium.toFixed(2) }}</span>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="!marineForm.valid"
+      class="submit-btn"
+    >
+      Get Quote
+    </button>
+  </form>
+
+  <div class="info-box">
+    <h3>Rate Table Reference</h3>
+    <table class="rate-table">
+      <thead>
+        <tr>
+          <th>Risk Level</th>
+          <th>Clause A</th>
+          <th>Clause B</th>
+          <th>Clause C</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Low</td>
+          <td>0.15%</td>
+          <td>0.10%</td>
+          <td>0.08%</td>
+        </tr>
+        <tr>
+          <td>Medium</td>
+          <td>0.25%</td>
+          <td>0.18%</td>
+          <td>0.12%</td>
+        </tr>
+        <tr>
+          <td>High</td>
+          <td>0.40%</td>
+          <td>0.30%</td>
+          <td>0.20%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

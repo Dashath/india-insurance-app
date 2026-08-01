@@ -7,6 +7,10 @@
 
   <nav class="app-nav">
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <!-- Marine Insurance link - only visible when logged in -->
+    @if (auth.isAuthenticated$ | async) {
+      <a routerLink="/marine-quote" routerLinkActive="active">Marine Insurance</a>
+    }
     <!-- Link to the protected page. Clicking it when logged out sends you to login. -->
     <a routerLink="/profile" routerLinkActive="active">Profile</a>
   </nav>

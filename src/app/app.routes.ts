@@ -6,12 +6,15 @@ import { Routes } from '@angular/router';
 import { authGuardFn } from '@auth0/auth0-angular';
 import { Home } from './pages/home/home';
 import { Profile } from './pages/profile/profile';
+import { MarineQuote } from './pages/marine-quote/marine-quote';
 
 export const routes: Routes = [
   // Home page — open to everyone.
   { path: '', component: Home, title: 'Home' },
   // Profile page — PROTECTED. canActivate runs authGuardFn before showing it.
   { path: 'profile', component: Profile, title: 'Profile', canActivate: [authGuardFn] },
+  // Marine Quote page — PROTECTED. Requires login to access.
+  { path: 'marine-quote', component: MarineQuote, title: 'Marine Insurance Quote', canActivate: [authGuardFn] },
   // Any unknown URL falls back to Home.
   { path: '**', redirectTo: '' },
 ];
