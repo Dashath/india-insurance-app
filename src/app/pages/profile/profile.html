@@ -1,0 +1,17 @@
+<!-- Protected profile page. Only shown to logged-in users. -->
+<section>
+  <h1>Your Profile</h1>
+
+  @if (auth.user$ | async; as user) {
+    <div class="card">
+      @if (user.picture) {
+        <img class="avatar" [src]="user.picture" alt="profile picture" />
+      }
+      <p><strong>{{ user.name }}</strong></p>
+      <p class="muted">{{ user.email }}</p>
+    </div>
+
+    <!-- The full profile object from Auth0, shown as JSON for learning. -->
+    <pre class="json">{{ user | json }}</pre>
+  }
+</section>

@@ -1,35 +1,28 @@
 <!--
-  app.html — the template for the App component (app.ts).
-  It shows a Login button when logged out, and the user's info + Logout
-  button when logged in.
+  app.html — the app shell. Header (brand + nav + login/logout) stays on every
+  page; the current page renders inside <router-outlet />.
 -->
-<main class="container">
-  <h1>India Insurance</h1>
+<header class="app-header">
+  <div class="brand">India Insurance</div>
 
-  <!--
-    auth.isLoading$ is an Observable (a value that arrives over time).
-    The `| async` pipe subscribes to it and gives us the latest value.
-    While Auth0 is checking the session, we show "Loading...".
-  -->
-  @if (auth.isLoading$ | async) {
-    <p>Loading...</p>
-  } @else {
-    <!-- auth.isAuthenticated$ is true when the user is logged in. -->
-    @if (auth.isAuthenticated$ | async) {
-      <!-- auth.user$ holds the logged-in user's profile. -->
-      @if (auth.user$ | async; as user) {
-        <div class="card">
-          @if (user.picture) {
-            <img class="avatar" [src]="user.picture" alt="profile picture" />
-          }
-          <p>Welcome, <strong>{{ user.name }}</strong></p>
-          <p class="muted">{{ user.email }}</p>
-        </div>
-      }
+  <nav class="app-nav">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <!-- Link to the protected page. Clicking it when logged out sends you to login. -->
+    <a routerLink="/profile" routerLinkActive="active">Profile</a>
+  </nav>
+
+  <div class="auth-actions">
+    @if (auth.isLoading$ | async) {
+      <span class="muted">...</span>
+    } @else if (auth.isAuthenticated$ | async) {
       <button class="btn" (click)="logout()">Log out</button>
     } @else {
-      <p>You are not logged in.</p>
       <button class="btn" (click)="login()">Log in</button>
     }
-  }
+  </div>
+</header>
+
+<!-- The matched page component is rendered here. -->
+<main class="app-main">
+  <router-outlet />
 </main>

@@ -1,52 +1,71 @@
 /*
-  app.css — styles for the App component ONLY.
+  app.css — styles for the App shell (header + main area).
 */
 
-.container {
-  max-width: 700px;
-  margin: 3rem auto;
-  padding: 0 1rem;
+:host {
+  display: block;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   color: #1a1a2e;
-  text-align: center;
 }
 
-h1 {
-  color: #0b3d91;
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 2rem;
+  background: #0b3d91;
+  color: #fff;
 }
 
-/* The box showing the logged-in user's details. */
-.card {
-  display: inline-block;
-  padding: 1rem 1.5rem;
-  margin: 1rem auto;
-  border: 1px solid #e2e6ee;
-  border-radius: 8px;
+.brand {
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
-.avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  object-fit: cover;
+.app-nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.app-nav a {
+  color: #dbe4ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.app-nav a.active,
+.app-nav a:hover {
+  color: #fff;
+  border-bottom: 2px solid #ff9933;
+}
+
+/* Push the login/logout button to the far right. */
+.auth-actions {
+  margin-left: auto;
+}
+
+.app-main {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
 .muted {
-  color: #777;
+  color: #cfd8ef;
   font-size: 0.9rem;
 }
 
-/* Login / Logout button. */
 .btn {
-  padding: 0.6rem 1.4rem;
-  font-size: 1rem;
-  color: #fff;
-  background: #0b3d91;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.95rem;
+  color: #0b3d91;
+  background: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .btn:hover {
-  background: #09317a;
+  background: #eef2ff;
 }

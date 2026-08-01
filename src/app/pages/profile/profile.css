@@ -1,0 +1,29 @@
+.card {
+  display: inline-block;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border: 1px solid #e2e6ee;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.muted {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.json {
+  background: #f5f7fb;
+  border: 1px solid #e2e6ee;
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.8rem;
+}

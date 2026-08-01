@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { provideAuth0 } from '@auth0/auth0-angular';
 import { App } from './app';
 
@@ -6,8 +7,9 @@ describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      // The App component depends on Auth0's AuthService, so the test needs it too.
+      // The App component depends on the router and Auth0, so the test needs them too.
       providers: [
+        provideRouter([]),
         provideAuth0({ domain: 'example.auth0.com', clientId: 'test' }),
       ],
     }).compileComponents();
@@ -19,10 +21,10 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render the brand', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('India Insurance');
+    expect(compiled.querySelector('.brand')?.textContent).toContain('India Insurance');
   });
 });

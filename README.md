@@ -53,8 +53,11 @@ How it works:
 - `provideAuth0({ domain, clientId, ... })` in `app.config.ts` sets up the SDK.
 - `AuthService` (injected in `app.ts`) exposes `isAuthenticated$`, `user$`,
   `loginWithRedirect()`, and `logout()`.
-- `app.html` shows a **Log in** button when logged out, and the user's profile
-  + **Log out** button when logged in.
+- The header (`app.html`) shows a **Log in** button when logged out and a
+  **Log out** button when logged in.
+- **Protected page:** `/profile` is guarded by Auth0's `authGuardFn` in
+  `app.routes.ts` (`canActivate: [authGuardFn]`). Visiting it while logged out
+  sends you to the Auth0 login page first; once logged in it shows your profile.
 
 ## Useful commands
 
@@ -70,11 +73,15 @@ How it works:
 ```
 src/
   app/
-    app.ts        # root component (TypeScript logic)
-    app.html      # root component template (what you see)
-    app.css       # root component styles
-    app.config.ts # app-wide providers/config
-  main.ts         # bootstrap (starts the app)
-  index.html      # host HTML page (<app-root> lives here)
-  styles.css      # global styles
+    app.ts          # root shell component (header, nav, login/logout)
+    app.html        # shell template with <router-outlet />
+    app.css         # shell styles
+    app.config.ts   # app-wide providers (router + Auth0)
+    app.routes.ts   # routes; /profile is protected by authGuardFn
+    pages/
+      home/         # public Home page
+      profile/      # protected Profile page (shows Auth0 user)
+  main.ts           # bootstrap (starts the app)
+  index.html        # host HTML page (<app-root> lives here)
+  styles.css        # global styles
 ```
