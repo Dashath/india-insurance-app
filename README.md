@@ -33,6 +33,29 @@ Then open http://localhost:4200 in your browser. The app reloads
 automatically when you change a source file. Press `Ctrl+C` in the terminal
 to stop it.
 
+## Authentication (Auth0)
+
+This app uses [Auth0](https://auth0.com) for login/logout via the official
+`@auth0/auth0-angular` SDK. The domain and clientId are configured in
+`src/app/app.config.ts`.
+
+**Before login works, configure your Auth0 Application** (Auth0 Dashboard →
+Applications → your app → Settings). Add `http://localhost:4200` to each of:
+
+- **Allowed Callback URLs**: `http://localhost:4200`
+- **Allowed Logout URLs**: `http://localhost:4200`
+- **Allowed Web Origins**: `http://localhost:4200`
+
+Click **Save Changes**. (The Application Type should be **Single Page
+Application**.) Without this you get a "Callback URL mismatch" error.
+
+How it works:
+- `provideAuth0({ domain, clientId, ... })` in `app.config.ts` sets up the SDK.
+- `AuthService` (injected in `app.ts`) exposes `isAuthenticated$`, `user$`,
+  `loginWithRedirect()`, and `logout()`.
+- `app.html` shows a **Log in** button when logged out, and the user's profile
+  + **Log out** button when logged in.
+
 ## Useful commands
 
 | Command | Description |

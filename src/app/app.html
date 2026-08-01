@@ -1,13 +1,35 @@
 <!--
   app.html — the template for the App component (app.ts).
-  This is what actually appears on the screen inside <app-root>.
+  It shows a Login button when logged out, and the user's info + Logout
+  button when logged in.
 -->
 <main class="container">
+  <h1>India Insurance</h1>
+
   <!--
-    {{ ... }} is "interpolation": Angular runs the code inside the braces and
-    prints the result. title() reads the signal defined in app.ts, so this
-    shows: Welcome to India Insurance
+    auth.isLoading$ is an Observable (a value that arrives over time).
+    The `| async` pipe subscribes to it and gives us the latest value.
+    While Auth0 is checking the session, we show "Loading...".
   -->
-  <h1>Welcome to {{ title() }}</h1>
-  <p>This is a simple Angular app. Edit <code>src/app/app.html</code> to change this page.</p>
+  @if (auth.isLoading$ | async) {
+    <p>Loading...</p>
+  } @else {
+    <!-- auth.isAuthenticated$ is true when the user is logged in. -->
+    @if (auth.isAuthenticated$ | async) {
+      <!-- auth.user$ holds the logged-in user's profile. -->
+      @if (auth.user$ | async; as user) {
+        <div class="card">
+          @if (user.picture) {
+            <img class="avatar" [src]="user.picture" alt="profile picture" />
+          }
+          <p>Welcome, <strong>{{ user.name }}</strong></p>
+          <p class="muted">{{ user.email }}</p>
+        </div>
+      }
+      <button class="btn" (click)="logout()">Log out</button>
+    } @else {
+      <p>You are not logged in.</p>
+      <button class="btn" (click)="login()">Log in</button>
+    }
+  }
 </main>

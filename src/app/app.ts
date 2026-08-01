@@ -1,28 +1,34 @@
-// app.ts — the ROOT component. A "component" is the basic building block of
-// an Angular app. It bundles together three things:
-//   1) a TypeScript class (logic + data)   -> this file
-//   2) an HTML template (what you see)      -> app.html
-//   3) CSS styles (how it looks)            -> app.css
+// app.ts — the ROOT component. It now uses Auth0 to handle login/logout.
 
-// `Component` lets us declare a class as an Angular component.
-// `signal` is Angular's way to hold a value that the screen reacts to.
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
+// CommonModule gives us the async pipe (used in the template as `| async`).
+import { CommonModule } from '@angular/common';
+// AuthService: the Auth0 SDK service that knows if the user is logged in,
+// who they are, and how to log in/out.
+import { AuthService } from '@auth0/auth0-angular';
+// DOCUMENT lets us read the current origin to redirect back to after logout.
+import { DOCUMENT } from '@angular/common';
 
-// @Component is a "decorator": it attaches configuration to the class below.
 @Component({
-  // selector: the custom HTML tag for this component. Because it is
-  // "app-root", this component fills the <app-root> tag in index.html.
   selector: 'app-root',
-  // imports: other components/directives this template is allowed to use.
-  // Empty for now because our template is plain HTML.
-  imports: [],
-  // templateUrl: which HTML file is this component's template.
+  imports: [CommonModule],
   templateUrl: './app.html',
-  // styleUrl: which CSS file styles this component (scoped to it only).
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
-  // A signal holding a piece of data. In the template we read it as title().
-  // If we ever change it (title.set('...')), the screen updates automatically.
-  protected readonly title = signal('India Insurance');
+  // inject() is the modern way to get a dependency (instead of a constructor).
+  protected readonly auth = inject(AuthService);
+  private readonly document = inject(DOCUMENT);
+
+  // Start the Auth0 login flow (redirects to the Auth0 hosted login page).
+  login(): void {
+    this.auth.loginWithRedirect();
+  }
+
+  // Log the user out and return them to the app's home page.
+  logout(): void {
+    this.auth.logout({
+      logoutParams: { returnTo: this.document.location.origin },
+    });
+  }
 }
